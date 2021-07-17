@@ -7,13 +7,19 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
 import { CursosComponent } from './pages/cursos/cursos.component';
 
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     PagesComponent,
     HomePageComponent,
     ContactoComponent,
-    CursosComponent
+    CursosComponent,
+    /* Componentes de Shared */
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule
