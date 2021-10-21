@@ -4,12 +4,17 @@ import { Routes, RouterModule } from "@angular/router";
 import { CursosComponent } from "./pages/cursos/cursos.component";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
 import { JuegosInteractivosComponent } from "./pages/juegos-interactivos/juegos-interactivos.component";
+/* Componentes de registro y login */
+import { LoginComponent } from "./auth/login/login.component";
+import { RegisterComponent } from "./auth/register/register.component";
 
 
 const app_routes: Routes = [
     { path: '', component: HomePageComponent },
     { path: 'juegos', component: JuegosInteractivosComponent},
     { path: 'cursos', component: CursosComponent},
+    { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
+    { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
     { path: '**', pathMatch: 'full', redirectTo: ''}
 ];
 
