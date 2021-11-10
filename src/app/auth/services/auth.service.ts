@@ -1,25 +1,61 @@
 import { Injectable } from '@angular/core';
-import  auth from 'firebase/app';
+import { first } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
-import  User from 'firebase/app';
+import { User } from 'src/app/models/auth/User';
+
 
 @Injectable()
 
 export class AuthService {
 
+  public user: User;
+
   constructor(public afAuth: AngularFireAuth,) { }
 
+  //Método para realizar al registro realizado
   async login( email: string, password: string ){
-    const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
-    return result;
-  }
-  register() {}
 
+    try{
+      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+      return result;
+    }
+    catch(error){
+      console.log("Algo ha sucedido")
+    }
+    
+  }
+ 
+  //Método para realizar el registro de un usuario
+  async register(nombrecompleto: string, correo: string, contraseña: string) {
+  
+    try{
+      const result = await this.afAuth.createUserWithEmailAndPassword(correo, contraseña);
+      return result;
+    } 
+    catch(error) {
+      console.log("error");
+    }
+    
+  }
+
+  //Método para salir de la sesión iniciada
   async logout() {
-    await this.afAuth.signOut();
+    try {
+      await this.afAuth.signOut();  
+    } catch (error) {
+      console.log("error");
+    }
+    
   }
 
-  getCurrentUser() {}
+  //Método para obtener el usuario actual
+  getCurrentUser() {
+    try {
+      return this.afAuth.authState.pipe(first()).toPromise();
+    } catch (error) {
+      console.log("Error al obtener un usuario")
+    }
+  }
 
   
 }

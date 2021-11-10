@@ -33,16 +33,25 @@
 
       <nav id="mainav" class="fuente-letra">
 
+        <ul class="clear" *ngIf="user$ | async as user; else login">
+          <li><a routerLink="">Inicio</a></li>
+          <li><a routerLink="juegos">Juegos Interactivos</a></li>
+          <li><a routerLink="about">Acerca de</a></li>
+          <li><a routerLink="cursos">Cursos en el colegio</a></li>
+          <li><a *ngIf="user">{{ user?.email }}</a></li>
+          <li><a *ngIf="user" (click)="onLogout()" routerLink="">Salir</a></li>
+        </ul>
+
+        <ng-template #login>
         <ul class="clear">
           <li><a routerLink="">Inicio</a></li>
-          <li><a routerLink="juegos">Juegos Interactivos</a>
-          </li>
-<!--
+          <li><a routerLink="juegos">Juegos Interactivos</a></li>
           <li><a routerLink="about">Acerca de</a></li>
-          <li><a routerLink="cursos">Cursos en el colegio</a></li> -->
-          <li><a routerLink="login">Ingresa</a></li>
-          <li><a routerLink="register">Registrate</a></li>
+          <li><a routerLink="cursos">Cursos en el colegio</a></li>
+          <li><a *ngIf="!user" routerLink="login">Ingresa</a></li>
+          <li><a *ngIf="!user" routerLink="register">Registrate</a></li>
         </ul>
+        </ng-template>
 
       </nav>
     </header>

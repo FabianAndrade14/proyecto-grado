@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [AuthService],
 })
 export class LoginComponent implements OnInit {
 
@@ -13,12 +17,25 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   })
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
   }
 
-  onLogin() {
-    console.log("Form -> ", this.loginForm.value);
+  async onLogin() {
+    const {email, password} = this.loginForm.value;    
+    try {
+      const user = await this.authService.login(email, password); 
+      if(user) {
+        //redireccionamiento a la página principal
+        this.router.navigate(['/'])
+      }
+    } catch (error) {
+      console.log('error')
+    }
+    
   }
 }
