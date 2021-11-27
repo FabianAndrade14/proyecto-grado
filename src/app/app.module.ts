@@ -16,6 +16,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { JuegosInteractivosComponent } from './pages/juegos-interactivos/juegos-interactivos.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
+import { SendEmailComponent } from './auth/send-email/send-email.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { environment } from 'src/environments/environment';
     /* Componentes de Shared */
     HeaderComponent,
     FooterComponent,
+    SendEmailComponent,
   ],
   imports: [
     BrowserModule,

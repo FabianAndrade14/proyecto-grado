@@ -12,6 +12,9 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth,) { }
 
+  async sendVerificationEmail(): Promise<void> {
+    return await (await this.afAuth.currentUser).sendEmailVerification();
+  }
   //Método para realizar al registro realizado
   async login( email: string, password: string ){
 

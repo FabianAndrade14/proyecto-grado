@@ -8,16 +8,39 @@ import { JuegosInteractivosComponent } from "./pages/juegos-interactivos/juegos-
 /* Componentes de registro y login */
 import { LoginComponent } from "./auth/login/login.component";
 import { RegisterComponent } from "./auth/register/register.component";
+import { SendEmailComponent } from "./auth/send-email/send-email.component";
 
 
 const app_routes: Routes = [
-    { path: '', component: HomePageComponent },
-    { path: 'juegos', component: JuegosInteractivosComponent},
-    { path: 'cursos', component: CursosComponent},
-    { path: 'about', component: ContactoComponent },
-    { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
-    { path: 'register', loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) },
-    { path: '**', pathMatch: 'full', redirectTo: ''}
+    { 
+        path: '', component: HomePageComponent 
+    },
+    { 
+        path: 'juegos', component: JuegosInteractivosComponent
+    },
+    { 
+        path: 'cursos', component: CursosComponent
+    },
+    { 
+        path: 'about', component: ContactoComponent 
+    },
+    {
+        path: 'login', 
+        loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) 
+    },
+    { 
+        path: 'register', 
+        loadChildren: () => import('./auth/register/register.module').then(m => m.RegisterModule) 
+    },
+    {
+        path: 'verification-email',
+        component: SendEmailComponent,
+    },
+    { 
+        path: '**', 
+        pathMatch: 'full', 
+        redirectTo: ''
+    }
 ];
 
 @NgModule({

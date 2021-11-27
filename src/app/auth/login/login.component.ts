@@ -29,9 +29,13 @@ export class LoginComponent implements OnInit {
     const {email, password} = this.loginForm.value;    
     try {
       const user = await this.authService.login(email, password); 
-      if(user) {
+      if(user && user.user.emailVerified) {
         //redireccionamiento a la página principal
         this.router.navigate(['/'])
+      } else if (user) {
+        this.router.navigate(['/verification-email']);
+      } else {
+        this.router.navigate(['/register']);
       }
     } catch (error) {
       console.log('error')
